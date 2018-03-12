@@ -9,9 +9,7 @@ import LoginForm from './components/LoginForm'
 class App extends Component {
 
     componentWillMount() {
-        firebase.initializeApp({
-            firebaseConfig
-        })
+        firebase.initializeApp(firebaseConfig)
     }
 
     render() {
