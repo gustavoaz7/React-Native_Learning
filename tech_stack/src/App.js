@@ -5,13 +5,15 @@ import { createStore } from 'redux'
 
 import reducers from './reducers'
 import { Header } from './components/common'
+import LibraryList from './components/LibraryList'
 
 const store = createStore(reducers)
 
 const App = () => (
     <Provider store={store} >
-        <View>
+        <View style={{ flex: 1 }} >
             <Header content='Tech Stack' />
+            <LibraryList />
         </View>
     </Provider>
 )
