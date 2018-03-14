@@ -30,3 +30,10 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
         .then(() => dispatch({ type: 'EMPLOYEE_SAVE_SUCCESS' }))
         .then(() => Actions.reset('main'))
 }
+
+export const employeeDelete = ({ uid }) => {
+    const { currentUser } = firebase.auth()
+    return (dispatch) => firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+        .remove()
+        .then(() => Actions.reset('main'))
+}
