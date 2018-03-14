@@ -3,7 +3,7 @@ import { Picker, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import { Card, CardSection, Field, Button } from './common'
-import { employeeUpdate } from '../actions'
+import { employeeUpdate, employeeCreate } from '../actions'
 
 class EmployeeCreate extends Component {
 
@@ -17,6 +17,11 @@ class EmployeeCreate extends Component {
 
     onShiftChange(text) {
         this.props.employeeUpdate({ key: 'shift', value: text })
+    }
+
+    onButtonPress() {
+        const { name, phone, shift } = this.props
+        this.props.employeeCreate({ name, phone, shift: shift || 'Monday' })
     }
 
   render() {
@@ -59,6 +64,7 @@ class EmployeeCreate extends Component {
         <CardSection>
             <Button
                 content='Create'
+                onPress={this.onButtonPress.bind(this)}
             />
         </CardSection>
       </Card>
@@ -78,4 +84,4 @@ const mapStateToProps = ({ employeeForm }) => {
     return { name, phone, shift }
 }
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate)
+export default connect(mapStateToProps, { employeeUpdate, employeeCreate })(EmployeeCreate)
