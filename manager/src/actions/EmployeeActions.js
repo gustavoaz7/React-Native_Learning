@@ -14,3 +14,11 @@ export const employeeCreate = ({ name, phone, shift }) => {
         .then(() => Actions.reset('main'))  /* reset - Clears the routing stack and pushes the scene 
             into the first index (No transition & no Back button) */
 }
+
+export const employeesFetch = () => (dispatch) => {
+    const { currentUser } = firebase.auth()
+    firebase.database().ref(`/users/${currentUser.uid}/employees`)
+        .on('value', snapshot => {
+            dispatch({ type: 'EMPLOYEES_FETCH_SUCCESS', payload: snapshot.val() })
+        })
+}
