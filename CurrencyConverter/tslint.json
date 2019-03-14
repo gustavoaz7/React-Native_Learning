@@ -1,0 +1,32 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "jsx-alignment": true,
+    "jsx-self-close": true,
+    "jsx-space-before-trailing-slash": true,
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false,
+    "interface-name": true,
+    "no-empty-interface": true,
+    "no-unused-variable": true,
+    "prefer-array-literal": true,
+    "prefer-template": true,
+    "semicolon": true,
+    "variable-name": [
+      true,
+      "allow-pascal-case",
+      "ban-keywords",
+      "check-format"
+    ]
+  },
+  "rulesDirectory": [],
+  
+  "_comment": {
+    "object-shorthand-properties-first": false,
+    "strict-boolean-expressions": false,
+    "object-literal-sort-keys": false,
+    "curly": false
+  }
+}
