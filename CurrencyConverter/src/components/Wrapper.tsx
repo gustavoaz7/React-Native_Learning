@@ -1,12 +1,23 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 
 interface IWrapper {
   children: ReactNode;
 }
 
+function dismissKeyboard() {
+  Keyboard.dismiss();
+}
+
 const Wrapper = ({ children }: IWrapper) => (
-  <View style={styles.wrapper}>{children}</View>
+  <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    <View style={styles.wrapper}>{children}</View>
+  </TouchableWithoutFeedback>
 );
 
 const styles = StyleSheet.create({
