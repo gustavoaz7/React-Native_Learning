@@ -8,10 +8,12 @@
     "jsx-space-before-trailing-slash": true,
     "jsx-boolean-value": false,
     "jsx-no-multiline-js": false,
+    "ordered-imports": false,
+    "member-ordering": false,
+    "object-literal-sort-keys": false,
     "interface-name": true,
     "no-empty-interface": true,
-    "no-unused-variable": true,
-    "prefer-array-literal": true,
+    "no-console": false,
     "prefer-template": true,
     "semicolon": true,
     "variable-name": [
@@ -21,12 +23,5 @@
       "check-format"
     ]
   },
-  "rulesDirectory": [],
-  
-  "_comment": {
-    "object-shorthand-properties-first": false,
-    "strict-boolean-expressions": false,
-    "object-literal-sort-keys": false,
-    "curly": false
-  }
+  "rulesDirectory": []
 }
