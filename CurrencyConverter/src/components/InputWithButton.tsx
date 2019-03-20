@@ -3,17 +3,19 @@ import {
   View,
   TextInput,
   Text,
-  TouchableHighlight,
   StyleSheet,
   KeyboardTypeOptions,
+  GestureResponderEvent,
+  ViewStyle,
 } from 'react-native';
+import Touchable from './Touchable';
 
 import { PRIMARY_COLOR, LIGHT_GRAY, GRAY, DARK_GRAY } from '../styles';
 
 interface IInputWithButton {
   text: string;
-  onPress: () => void;
-  onChangeText?: (t: string) => void;
+  onPress(event: GestureResponderEvent): void;
+  onChangeText?: (text: string) => void;
   editable?: boolean;
   keyboardType?: KeyboardTypeOptions;
   defaultValue?: string;
@@ -22,26 +24,26 @@ interface IInputWithButton {
 
 const InputWithButton = ({
   text,
-  onPress = () => {},
-  onChangeText = () => {},
+  onPress = () => void 0,
+  onChangeText = () => void 0,
   editable = true,
   keyboardType,
   defaultValue,
   value,
 }: IInputWithButton) => {
-  const containerStyle: Array<Object> = [styles.container];
+  const containerStyle: ViewStyle[] = [styles.container];
   if (editable === false) {
     containerStyle.push(styles.disabled);
   }
   return (
     <View style={containerStyle}>
-      <TouchableHighlight
-        underlayColor={LIGHT_GRAY}
+      <Touchable
+        pressColor={LIGHT_GRAY}
         onPress={onPress}
         style={styles.button}
       >
         <Text style={styles.text}>{text}</Text>
-      </TouchableHighlight>
+      </Touchable>
       <View style={styles.border} />
       <TextInput
         style={styles.input}
