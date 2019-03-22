@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Text, StyleSheet, GestureResponderEvent } from 'react-native';
 import Touchable from '../Touchable';
 import Icon from './Icon';
 
 interface IListItem {
   text: string;
-  selected: boolean;
+  selected?: boolean;
   onPress(event: GestureResponderEvent): void;
   showIcon?: boolean;
   checkmark?: boolean;
+  customIcon?: ReactNode;
+  iconBackground?: string;
 }
 
 const ListItem = ({
@@ -17,10 +19,21 @@ const ListItem = ({
   selected = false,
   showIcon = true,
   checkmark = true,
+  customIcon = null,
+  iconBackground,
 }: IListItem) => (
   <Touchable onPress={onPress} style={styles.row}>
     <Text style={styles.text}>{text}</Text>
-    {selected ? <Icon visible={showIcon} checkmark={checkmark} /> : <Icon />}
+    {selected ? (
+      <Icon
+        visible={showIcon}
+        checkmark={checkmark}
+        backgroundColor={iconBackground}
+      />
+    ) : (
+      <Icon />
+    )}
+    {customIcon}
   </Touchable>
 );
 

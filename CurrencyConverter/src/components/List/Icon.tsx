@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { PRIMARY_COLOR } from '../../styles';
 
 interface IIcon {
   visible?: boolean;
   checkmark?: boolean;
+  backgroundColor?: string;
 }
 
-const Icon = ({ visible, checkmark }: IIcon) => {
-  if (!visible) { 
+const Icon = ({ visible, checkmark, backgroundColor }: IIcon) => {
+  if (!visible) {
     return null;
   }
-
+  const iconStyle = [styles.icon, { backgroundColor }];
   return (
-    <View style={styles.icon}>
+    <View style={iconStyle}>
       {checkmark && (
         <Image
           style={styles.checkmark}
@@ -27,7 +27,6 @@ const Icon = ({ visible, checkmark }: IIcon) => {
 
 const styles = StyleSheet.create({
   icon: {
-    backgroundColor: PRIMARY_COLOR,
     width: 30,
     height: 30,
     borderRadius: 30,

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Touchable from './Touchable';
 
-import { PRIMARY_COLOR, LIGHT_GRAY, GRAY, DARK_GRAY } from '../styles';
+import { PRIMARY_BLUE, LIGHT_GRAY, GRAY, DARK_GRAY } from '../styles';
 
 interface IInputWithButton {
   text: string;
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: GRAY,
   },
   text: {
-    color: PRIMARY_COLOR,
+    color: PRIMARY_BLUE,
     fontSize: 20,
     fontWeight: '600',
     paddingHorizontal: 12,
