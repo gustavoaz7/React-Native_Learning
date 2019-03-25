@@ -1,8 +1,10 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StatusBar } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
 
 import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
+import { ROUTES } from '../config/routes';
 import {
   PRIMARY_BLUE,
   PRIMARY_ORANGE,
@@ -10,10 +12,14 @@ import {
   PRIMARY_PURPLE,
 } from '../styles';
 
-const Themes = () => {
-  const handleThemePress = color => {};
+const Themes = ({ navigation }: NavigationScreenProps) => {
+  const handleThemePress = color => {
+    navigation.navigate(ROUTES.Options);
+  };
+
   return (
     <ScrollView>
+      <StatusBar translucent={false} barStyle="default" />
       <ListItem
         text="Blue"
         onPress={() => handleThemePress(PRIMARY_BLUE)}

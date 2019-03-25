@@ -18,6 +18,10 @@ const CONV_RATE = 0.25;
 const CONV_DATE = new Date();
 
 const Home = ({ navigation }: NavigationInjectedProps) => {
+  const handleHeaderPress = () => {
+    navigation.navigate(ROUTES.Options);
+  };
+
   const [input, setInput] = useState(CONV_PRICE);
   const handlePressBaseCurrency = () => {
     navigation.navigate(ROUTES.CurrencyList, { title: 'Base Currency' });
@@ -28,11 +32,7 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
   return (
     <Wrapper>
       <StatusBar translucent={false} barStyle={'light-content'} />
-      <Header
-        onPress={() => {
-          console.log('!!GEAR PRESSED');
-        }}
-      />
+      <Header onPress={handleHeaderPress} />
       <KeyboardAvoidingView behavior="padding">
         <Logo />
         <InputWithButton
