@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
+import { NavigationInjectedProps } from 'react-navigation';
+import { ROUTES } from '../config/routes';
 
 import Wrapper from '../components/Wrapper';
 import Logo from '../components/Logo';
@@ -15,8 +17,14 @@ const CONV_PRICE = '0.25';
 const CONV_RATE = 0.25;
 const CONV_DATE = new Date();
 
-const Home = () => {
+const Home = ({ navigation }: NavigationInjectedProps) => {
   const [input, setInput] = useState(CONV_PRICE);
+  const handlePressBaseCurrency = () => {
+    navigation.navigate(ROUTES.CurrencyList, { title: 'Base Currency' });
+  };
+  const handlePressQuoteCurrency = () => {
+    navigation.navigate(ROUTES.CurrencyList, { title: 'Quote Currency' });
+  };
   return (
     <Wrapper>
       <StatusBar translucent={false} barStyle={'light-content'} />
@@ -29,18 +37,14 @@ const Home = () => {
         <Logo />
         <InputWithButton
           text={BASE_CURRENCY}
-          onPress={() => {
-            console.log(`!!${BASE_CURRENCY} PRESSED`);
-          }}
+          onPress={handlePressBaseCurrency}
           keyboardType="numeric"
           defaultValue={BASE_PRICE}
           onChangeText={text => setInput(text)}
         />
         <InputWithButton
           text={CONV_CURRENCY}
-          onPress={() => {
-            console.log(`!!${CONV_CURRENCY} PRESSED`);
-          }}
+          onPress={handlePressQuoteCurrency}
           editable={false}
           value={input}
         />

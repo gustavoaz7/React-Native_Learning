@@ -1,3 +1,8 @@
-import Home from './screens/Home';
+import React, { Component } from 'react';
+import AppContainer from './config/routes';
 
-export default Home;
+export default class App extends Component {
+  render() {
+    return <AppContainer />;
+  }
+}
