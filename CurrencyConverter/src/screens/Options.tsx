@@ -7,35 +7,48 @@ import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
 import { GRAY } from '../styles';
 import { ROUTES } from '../config/routes';
+import { useAlert, AlertProvider } from '../components/Alert';
 
 const PREFIX = Platform.select({ ios: 'ios', android: 'md' });
 const FIXER_URL = 'http://fixer.io';
-
-const handleFixerPress = () => {
-  Linking.openURL(FIXER_URL).catch(e => console.warn(e));
-};
 
 const Options = ({ navigation }: NavigationScreenProps) => {
   const handleThemesPress = () => {
     navigation.navigate(ROUTES.Themes);
   };
 
+  const alert = useAlert();
+  const handleFixerPress = () => {
+    Linking.openURL(FIXER_URL).catch(() => {
+      alert.current &&
+        alert.current.alertWithType(
+          'error',
+          'Sorry!',
+          "Fixer.io can't be opened right now.",
+        );
+    });
+  };
+
   return (
     <ScrollView>
-      <StatusBar translucent={false} barStyle="default" />
-      <ListItem
-        text="Themes"
-        onPress={handleThemesPress}
-        customIcon={
-          <Ionicons name={`${PREFIX}-arrow-forward`} color={GRAY} size={25} />
-        }
-      />
-      <Separator />
-      <ListItem
-        text="Fixer.io"
-        onPress={() => void 0}
-        customIcon={<Ionicons name={`${PREFIX}-link`} color={GRAY} size={25} />}
-      />
+      <AlertProvider>
+        <StatusBar translucent={false} barStyle="default" />
+        <ListItem
+          text="Themes"
+          onPress={handleThemesPress}
+          customIcon={
+            <Ionicons name={`${PREFIX}-arrow-forward`} color={GRAY} size={25} />
+          }
+        />
+        <Separator />
+        <ListItem
+          text="Fixer.io"
+          onPress={handleFixerPress}
+          customIcon={
+            <Ionicons name={`${PREFIX}-link`} color={GRAY} size={25} />
+          }
+        />
+      </AlertProvider>
     </ScrollView>
   );
 };
