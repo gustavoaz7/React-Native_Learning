@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ScrollView, Platform, StatusBar, Linking } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,12 +13,12 @@ const PREFIX = Platform.select({ ios: 'ios', android: 'md' });
 const FIXER_URL = 'http://fixer.io';
 
 const Options = ({ navigation }: NavigationScreenProps) => {
-  const handleThemesPress = () => {
+  const handleThemesPress = useCallback(() => {
     navigation.navigate(ROUTES.Themes);
-  };
+  }, [navigation.navigate]);
 
   const alert = useAlert();
-  const handleFixerPress = () => {
+  const handleFixerPress = useCallback(() => {
     Linking.openURL(FIXER_URL).catch(() => {
       alert.current &&
         alert.current.alertWithType(
@@ -27,7 +27,7 @@ const Options = ({ navigation }: NavigationScreenProps) => {
           "Fixer.io can't be opened right now.",
         );
     });
-  };
+  }, [alert]);
 
   return (
     <ScrollView>

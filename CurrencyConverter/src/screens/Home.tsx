@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import { ROUTES } from '../config/routes';
@@ -18,17 +18,18 @@ const CONV_RATE = 0.25;
 const CONV_DATE = new Date();
 
 const Home = ({ navigation }: NavigationInjectedProps) => {
-  const handleHeaderPress = () => {
+  const handleHeaderPress = useCallback(() => {
     navigation.navigate(ROUTES.Options);
-  };
+  }, [navigation.navigate]);
 
   const [input, setInput] = useState(CONV_PRICE);
-  const handlePressBaseCurrency = () => {
+  const handlePressBaseCurrency = useCallback(() => {
     navigation.navigate(ROUTES.CurrencyList, { title: 'Base Currency' });
-  };
-  const handlePressQuoteCurrency = () => {
+  }, [navigation.navigate]);
+  const handlePressQuoteCurrency = useCallback(() => {
     navigation.navigate(ROUTES.CurrencyList, { title: 'Quote Currency' });
-  };
+  }, [navigation.navigate]);
+  
   return (
     <Wrapper>
       <StatusBar translucent={false} barStyle={'light-content'} />

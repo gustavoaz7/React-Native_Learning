@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   StatusBar,
@@ -19,9 +19,10 @@ const renderItemSeparator: FlatListProps<
 >['ItemSeparatorComponent'] = () => <Separator />;
 
 const CurrencyList = ({ navigation }: NavigationScreenProps) => {
-  const handleItemPress = () => {
+  const handleItemPress = useCallback(() => {
     navigation.goBack();
-  };
+  }, [navigation.goBack]);
+  
   const renderItem: FlatListProps<string>['renderItem'] = ({ item }) => (
     <ListItem
       text={item}
