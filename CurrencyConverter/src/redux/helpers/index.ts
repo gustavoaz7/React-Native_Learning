@@ -15,5 +15,5 @@ export function createAction<T extends string, P>(
 ): IAction<T, P>;
 
 export function createAction<T extends string, P>(type: T, payload?: P) {
-  return !payload ? { type } : { type, payload };
+  return payload === undefined ? { type } : { type, payload };
 }
