@@ -10,7 +10,7 @@ import { ROUTES } from '../config/routes';
 import { useAlert, AlertProvider } from '../components/Alert';
 
 const PREFIX = Platform.select({ ios: 'ios', android: 'md' });
-const FIXER_URL = 'http://fixer.io';
+const EXCHANGE_URL = 'http://exchangeratesapi.io';
 
 const Options = ({ navigation }: NavigationScreenProps) => {
   const handleThemesPress = useCallback(() => {
@@ -18,13 +18,13 @@ const Options = ({ navigation }: NavigationScreenProps) => {
   }, [navigation.navigate]);
 
   const alert = useAlert();
-  const handleFixerPress = useCallback(() => {
-    Linking.openURL(FIXER_URL).catch(() => {
+  const handleExchangePress = useCallback(() => {
+    Linking.openURL(EXCHANGE_URL).catch(() => {
       alert.current &&
         alert.current.alertWithType(
           'error',
           'Sorry!',
-          "Fixer.io can't be opened right now.",
+          "Exchangeratesapi.io can't be opened right now.",
         );
     });
   }, [alert]);
@@ -42,8 +42,8 @@ const Options = ({ navigation }: NavigationScreenProps) => {
         />
         <Separator />
         <ListItem
-          text="Fixer.io"
-          onPress={handleFixerPress}
+          text="Exchangeratesapi.io"
+          onPress={handleExchangePress}
           customIcon={
             <Ionicons name={`${PREFIX}-link`} color={GRAY} size={25} />
           }

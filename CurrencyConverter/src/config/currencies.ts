@@ -15,6 +15,7 @@ export default [
   'IDR',
   'ILS',
   'INR',
+  'ISK',
   'JPY',
   'KRW',
   'MXN',
