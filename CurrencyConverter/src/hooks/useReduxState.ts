@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useReduxStore } from '../redux/store';
-import { ReducerState } from '../redux/reducers';
+import { ReducerState } from '../redux/types';
 
 // TODO: Check if this is triggering a re-render of every function using this hook
 export function useReduxState<S extends (state: ReducerState) => any>(

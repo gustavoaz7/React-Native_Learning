@@ -2,7 +2,8 @@ import React, { ReactNode, createContext, useContext } from 'react';
 import { createStore, Store } from 'redux';
 import { ReactReduxContext, ReactReduxContextValue } from 'react-redux';
 
-import reducer, { ReducerState } from './reducers';
+import rootReducer from './reducers';
+import { ReducerState } from './types';
 
 interface IReduxStoreProviderProps {
   children: ReactNode;
@@ -23,6 +24,6 @@ export const ReduxStoreProvider = (props: IReduxStoreProviderProps) => {
 
 export const useReduxStore = () => useContext(ReduxStoreContext);
 
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 export default store;
