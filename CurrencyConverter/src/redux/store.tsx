@@ -1,29 +1,27 @@
-import React, { ReactNode, createContext, useContext, Fragment } from 'react';
+import React, { ReactNode, createContext, useContext } from 'react';
 import { createStore, Store } from 'redux';
 import { ReactReduxContext, ReactReduxContextValue } from 'react-redux';
 
-import reducer from './reducers';
+import reducer, { ReducerState } from './reducers';
 
-interface IStoreProviderProps {
+interface IReduxStoreProviderProps {
   children: ReactNode;
 }
 
-type ReducerState = typeof reducer;
-
 type IStore = Store<ReducerState>;
 
-export const StoreContext = createContext<IStore>(null as any);
+export const ReduxStoreContext = createContext<IStore>(null as any);
 
-export const StoreConsumer = StoreContext.Consumer;
+export const ReduxStoreConsumer = ReduxStoreContext.Consumer;
 
-export const StoreProvider = (props: IStoreProviderProps) => {
+export const ReduxStoreProvider = (props: IReduxStoreProviderProps) => {
   const { store: storeContextValue }: ReactReduxContextValue = useContext(
     ReactReduxContext,
   );
-  return <StoreContext.Provider {...props} value={storeContextValue} />;
+  return <ReduxStoreContext.Provider {...props} value={storeContextValue} />;
 };
 
-export const useStore = () => useContext(StoreContext);
+export const useReduxStore = () => useContext(ReduxStoreContext);
 
 const store = createStore(reducer);
 
