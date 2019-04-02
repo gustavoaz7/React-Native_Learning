@@ -65,9 +65,9 @@ const HomeStackNavigator = createStackNavigator(
 const currencyListNavigationOptions = ({
   navigation,
 }: NavigationScreenProps): NavigationStackScreenOptions => {
-  const navStateParams = navigation.state.params || {};
+  const title = navigation.getParam('title', 'Currency');
   return {
-    headerTitle: navStateParams.title || 'Currency',
+    headerTitle: title,
   };
 };
 
