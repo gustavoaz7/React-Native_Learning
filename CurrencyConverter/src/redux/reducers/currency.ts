@@ -1,44 +1,14 @@
 import { Reducer } from 'redux';
-import { SWAP_CURRENCY, CHANGE_CHURRENCY_AMOUNT } from '../constants';
+import {
+  SWAP_CURRENCY,
+  CHANGE_CHURRENCY_AMOUNT,
+  CHANGE_BASE_CURRENCY,
+  CHANGE_QUOTE_CURRENCY,
+} from '../constants';
 import * as currencyActions from '../actions/currency';
-import { ExtractActions } from '../helpers';
+import { ExtractActions } from '../types';
+import { TCurrencies } from '../types';
 
-// TODO: How to create a type from all elements in a string array
-type TCurrencies =
-  | 'AUD'
-  | 'BGN'
-  | 'BRL'
-  | 'CAD'
-  | 'CHF'
-  | 'CNY'
-  | 'CZK'
-  | 'DKK'
-  | 'EUR'
-  | 'GBP'
-  | 'HKD'
-  | 'HRK'
-  | 'HUF'
-  | 'IDR'
-  | 'ILS'
-  | 'INR'
-  | 'ISK'
-  | 'JPY'
-  | 'KRW'
-  | 'MXN'
-  | 'MYR'
-  | 'NOK'
-  | 'NZD'
-  | 'PHP'
-  | 'PLN'
-  | 'RON'
-  | 'RUB'
-  | 'SEK'
-  | 'SGD'
-  | 'THB'
-  | 'TRY'
-  | 'USD'
-  | 'ZAR';
-  
 interface IState {
   baseCurrency: TCurrencies;
   quoteCurrency: TCurrencies;
@@ -49,9 +19,7 @@ interface IState {
       isFetching: boolean;
       base: string;
       date: string;
-      rates: {
-        [key1 in TCurrencies]: number
-      };
+      rates: { [key1 in TCurrencies]: number };
     }
   };
 }
@@ -122,6 +90,10 @@ export const currenciesReducer: Reducer<IState, CurrencyActions> = (
         baseCurrency: state.quoteCurrency,
         quoteCurrency: state.baseCurrency,
       };
+    case CHANGE_BASE_CURRENCY:
+      return { ...state, baseCurrency: action.payload };
+    case CHANGE_QUOTE_CURRENCY:
+      return { ...state, quoteCurrency: action.payload };
     default:
       return state;
   }
