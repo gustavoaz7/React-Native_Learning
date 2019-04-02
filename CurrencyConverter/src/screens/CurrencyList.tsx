@@ -9,11 +9,17 @@ import {
 import { NavigationScreenProps } from 'react-navigation';
 
 import { useReduxAction } from '../hooks/useReduxAction';
+import { useReduxState } from '../hooks/useReduxState';
 import {
   changeBaseCurrency,
   changeQuoteCurrency,
 } from '../redux/actions/currency';
+import {
+  baseCurrencySelector,
+  quoteCurrencySelector,
+} from '../redux/selectors/currency';
 import currencies from '../config/currencies';
+import { TCurrencies } from '../redux/types';
 import { PRIMARY_BLUE } from '../styles';
 
 import ListItem from '../components/List/ListItem';
@@ -40,10 +46,18 @@ const CurrencyList = ({ navigation }: NavigationScreenProps) => {
     [navigation.goBack, navigation.getParam],
   );
 
+  let selectedCurrency: TCurrencies;
+  const type: string = navigation.getParam('type', '');
+  if (type === 'base') {
+    selectedCurrency = useReduxState(baseCurrencySelector);
+  } else if (type === 'quote') {
+    selectedCurrency = useReduxState(quoteCurrencySelector);
+  }
+
   const renderItem: FlatListProps<string>['renderItem'] = ({ item }) => (
     <ListItem
       text={item}
-      selected={item === 'CAD'}
+      selected={item === selectedCurrency}
       onPress={() => handleItemPress(item)}
       iconBackground={PRIMARY_BLUE}
     />
