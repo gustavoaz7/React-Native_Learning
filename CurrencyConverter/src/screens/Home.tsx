@@ -20,6 +20,7 @@ import InputWithButton from '../components/InputWithButton';
 import ClearButton from '../components/ClearButton';
 import LastConverted from '../components/LastConverted';
 import Header from '../components/Header';
+import { backgroundColorSelector, colorSelector } from '../redux/selectors/theme';
 
 const Home = ({ navigation }: NavigationInjectedProps) => {
   const handleHeaderPress = useCallback(() => {
@@ -56,24 +57,29 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
   ).toFixed(2);
   const quotePrice = (amount * conversionRate).toFixed(2);
 
+  const backgroundColor = useReduxState(backgroundColorSelector);
+  const color = useReduxState(colorSelector);
+
   return (
-    <Wrapper>
+    <Wrapper backgroundColor={backgroundColor}>
       <StatusBar translucent={false} barStyle={'light-content'} />
       <Header onPress={handleHeaderPress} />
       <KeyboardAvoidingView behavior="padding">
-        <Logo />
+        <Logo tintColor={color} />
         <InputWithButton
           text={baseCurrency}
           onPress={handlePressBaseCurrency}
           keyboardType="numeric"
           defaultValue={amount.toString()}
           onChangeText={handleTextChange}
+          textColor={backgroundColor}
         />
         <InputWithButton
           text={quoteCurrency}
           onPress={handlePressQuoteCurrency}
           editable={false}
           value={quotePrice}
+          textColor={backgroundColor}
         />
         <LastConverted
           base={baseCurrency}

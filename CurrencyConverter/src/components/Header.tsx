@@ -7,24 +7,29 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import Touchable from './Touchable';
+import { useReduxState } from '../hooks/useReduxState';
+import { colorSelector } from '../redux/selectors/theme';
 
 interface IHeader {
   onPress(event: GestureResponderEvent): void;
 }
 
-const Header = ({ onPress = () => void 0 }: IHeader) => (
-  <View style={styles.container}>
-    <View style={styles.button}>
-      <Touchable onPress={onPress} useOpacity>
-        <Image
-          resizeMode="contain"
-          source={require('../assets/gear.png')}
-          style={styles.image}
-        />
-      </Touchable>
+const Header = ({ onPress = () => void 0 }: IHeader) => {
+  const tintColor = useReduxState(colorSelector);
+  return (
+    <View style={styles.container}>
+      <View style={styles.button}>
+        <Touchable onPress={onPress} useOpacity>
+          <Image
+            resizeMode="contain"
+            source={require('../assets/gear.png')}
+            style={[styles.image, { tintColor }]}
+          />
+        </Touchable>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const gearSize = 20;
 const styles = StyleSheet.create({

@@ -19,20 +19,22 @@ const useAnimate = (keyboardStatus: KeyboardType) => {
   return imageSize;
 };
 
-const Logo = () => {
+interface ILogo {
+  tintColor: string;
+}
+
+const Logo = ({ tintColor }: ILogo) => {
   const keyboardStatus = useKeyboard();
   const imageSize = useAnimate(keyboardStatus);
-
-  const imageStyle = [styles.image, { width: imageSize, height: imageSize }];
 
   return (
     <View style={styles.container}>
       <Animated.Image
         source={require('../assets/logo.png')}
         resizeMode="contain"
-        style={imageStyle}
+        style={{ width: imageSize, height: imageSize, tintColor }}
       />
-      <Text style={styles.text}>{'Currency Converter'}</Text>
+      <Text style={[styles.text, { color: tintColor }]}>{'Currency Converter'}</Text>
     </View>
   );
 };
@@ -41,11 +43,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
-  image: {
-    tintColor: 'white',
-  },
   text: {
-    color: 'white',
     marginVertical: 10,
     fontSize: 28,
     fontWeight: '600',

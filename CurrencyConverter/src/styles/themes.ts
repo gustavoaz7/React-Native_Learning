@@ -7,7 +7,7 @@ const themes: TThemes = {
   },
   Orange: {
     backgroundColor: '#D57A66',
-    color: '#333',
+    color: '#444',
   },
   Green: {
     backgroundColor: '#00BD9D',

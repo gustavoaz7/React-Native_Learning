@@ -7,24 +7,29 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import Touchable from './Touchable';
+import { useReduxState } from '../hooks/useReduxState';
+import { colorSelector } from '../redux/selectors/theme';
 
 interface IClearButton {
   text: string;
   onPress(event: GestureResponderEvent): void;
 }
 
-const ClearButton = ({ text, onPress = () => void 0 }: IClearButton) => (
-  <Touchable onPress={onPress} style={styles.button} useOpacity>
-    <View style={styles.container}>
-      <Image
-        source={require('../assets/logo.png')}
-        resizeMode="contain"
-        style={styles.image}
-      />
-      <Text style={styles.text}>{text}</Text>
-    </View>
-  </Touchable>
-);
+const ClearButton = ({ text, onPress = () => void 0 }: IClearButton) => {
+  const color = useReduxState(colorSelector);
+  return (
+    <Touchable onPress={onPress} style={styles.button} useOpacity>
+      <View style={styles.container}>
+        <Image
+          source={require('../assets/logo.png')}
+          resizeMode="contain"
+          style={[styles.image, { tintColor: color }]}
+        />
+        <Text style={{ color }}>{text}</Text>
+      </View>
+    </Touchable>
+  );
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -39,11 +44,7 @@ const styles = StyleSheet.create({
   image: {
     width: 20,
     height: 20,
-    tintColor: '#fff',
     margin: 10,
-  },
-  text: {
-    color: '#fff',
   },
 });
 

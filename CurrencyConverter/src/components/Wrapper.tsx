@@ -8,24 +8,26 @@ import {
 
 interface IWrapper {
   children: ReactNode;
+  backgroundColor: string;
 }
 
 function dismissKeyboard() {
   Keyboard.dismiss();
 }
 
-const Wrapper = ({ children }: IWrapper) => (
-  <TouchableWithoutFeedback onPress={dismissKeyboard}>
-    <View style={styles.wrapper}>{children}</View>
-  </TouchableWithoutFeedback>
-);
+const Wrapper = ({ children, backgroundColor }: IWrapper) => {
+  return (
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <View style={[styles.wrapper, { backgroundColor }]}>{children}</View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4F6D7A',
   },
 });
 

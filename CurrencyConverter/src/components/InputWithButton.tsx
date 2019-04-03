@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import Touchable from './Touchable';
 
-import { PRIMARY_BLUE, LIGHT_GRAY, GRAY, DARK_GRAY } from '../styles';
+import { LIGHT_GRAY, GRAY, DARK_GRAY } from '../styles';
 
 interface IInputWithButton {
   text: string;
+  textColor: string;
   onPress(event: GestureResponderEvent): void;
   onChangeText?: (text: string) => void;
   editable?: boolean;
@@ -30,6 +31,7 @@ const InputWithButton = ({
   keyboardType,
   defaultValue,
   value,
+  textColor,
 }: IInputWithButton) => {
   const containerStyle: ViewStyle[] = [styles.container];
   if (editable === false) {
@@ -42,7 +44,7 @@ const InputWithButton = ({
         onPress={onPress}
         style={styles.button}
       >
-        <Text style={styles.text}>{text}</Text>
+        <Text style={[styles.text, { color: textColor }]}>{text}</Text>
       </Touchable>
       <View style={styles.border} />
       <TextInput
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: GRAY,
   },
   text: {
-    color: PRIMARY_BLUE,
     fontSize: 20,
     fontWeight: '600',
     paddingHorizontal: 12,

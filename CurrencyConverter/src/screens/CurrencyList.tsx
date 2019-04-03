@@ -18,9 +18,9 @@ import {
   baseCurrencySelector,
   quoteCurrencySelector,
 } from '../redux/selectors/currency';
-import currencies from '../config/currencies';
 import { TCurrencies } from '../redux/types';
-import { PRIMARY_BLUE } from '../styles';
+import { backgroundColorSelector } from '../redux/selectors/theme';
+import currencies from '../config/currencies';
 
 import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
@@ -54,12 +54,13 @@ const CurrencyList = ({ navigation }: NavigationScreenProps) => {
     selectedCurrency = useReduxState(quoteCurrencySelector);
   }
 
+  const primaryColor = useReduxState(backgroundColorSelector);
   const renderItem: FlatListProps<string>['renderItem'] = ({ item }) => (
     <ListItem
       text={item}
       selected={item === selectedCurrency}
       onPress={() => handleItemPress(item)}
-      iconBackground={PRIMARY_BLUE}
+      iconBackground={primaryColor}
     />
   );
 
