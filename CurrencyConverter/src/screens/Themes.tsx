@@ -2,18 +2,19 @@ import React from 'react';
 import { ScrollView, StatusBar } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 
+import { changeTheme } from '../redux/actions/theme';
+import { TThemeColors } from '../redux/types';
+import { useReduxAction } from '../hooks/useReduxAction';
+import { ROUTES } from '../config/routes';
+import themes from '../styles/themes';
+
 import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
-import { ROUTES } from '../config/routes';
-import {
-  PRIMARY_BLUE,
-  PRIMARY_ORANGE,
-  PRIMARY_GREEN,
-  PRIMARY_PURPLE,
-} from '../styles';
 
 const Themes = ({ navigation }: NavigationScreenProps) => {
-  const handleThemePress = color => {
+  const handleChangeTheme = useReduxAction(changeTheme);
+  const handleThemePress = (color: TThemeColors) => {
+    handleChangeTheme(color);
     navigation.navigate(ROUTES.Options);
   };
 
@@ -22,32 +23,32 @@ const Themes = ({ navigation }: NavigationScreenProps) => {
       <StatusBar translucent={false} barStyle="default" />
       <ListItem
         text="Blue"
-        onPress={() => handleThemePress(PRIMARY_BLUE)}
-        iconBackground={PRIMARY_BLUE}
+        onPress={() => handleThemePress('Blue')}
+        iconBackground={themes.Blue.backgroundColor}
         selected
         checkmark={false}
       />
       <Separator />
       <ListItem
         text="Orange"
-        onPress={() => handleThemePress(PRIMARY_ORANGE)}
-        iconBackground={PRIMARY_ORANGE}
+        onPress={() => handleThemePress('Orange')}
+        iconBackground={themes.Orange.backgroundColor}
         selected
         checkmark={false}
       />
       <Separator />
       <ListItem
         text="Green"
-        onPress={() => handleThemePress(PRIMARY_GREEN)}
-        iconBackground={PRIMARY_GREEN}
+        onPress={() => handleThemePress('Green')}
+        iconBackground={themes.Green.backgroundColor}
         selected
         checkmark={false}
       />
       <Separator />
       <ListItem
         text="Purple"
-        onPress={() => handleThemePress(PRIMARY_PURPLE)}
-        iconBackground={PRIMARY_PURPLE}
+        onPress={() => handleThemePress('Purple')}
+        iconBackground={themes.Purple.backgroundColor}
         selected
         checkmark={false}
       />

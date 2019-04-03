@@ -14,6 +14,15 @@ export interface IAction<T extends string, P> {
   readonly payload: P;
 }
 
+export type TThemeColors = 'Blue' | 'Orange' | 'Green' | 'Purple';
+
+export type TThemes = {
+  [key in TThemeColors]: {
+    backgroundColor: string;
+    color: string;
+  }
+};
+
 // TODO: How to create a type from all elements in a string array
 export type TCurrencies =
   | 'AUD'
