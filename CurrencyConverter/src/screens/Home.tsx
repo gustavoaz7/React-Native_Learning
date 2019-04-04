@@ -1,10 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import get from 'lodash/get';
 
 import { ROUTES } from '../config/routes';
-import { swapCurrency, changeCurrencyAmount } from '../redux/actions/currency';
+import {
+  swapCurrency,
+  changeCurrencyAmount,
+  getInitialConversion,
+} from '../redux/actions/currency';
 import { useReduxAction } from '../hooks/useReduxAction';
 import { useReduxState } from '../hooks/useReduxState';
 import {
@@ -20,9 +24,17 @@ import InputWithButton from '../components/InputWithButton';
 import ClearButton from '../components/ClearButton';
 import LastConverted from '../components/LastConverted';
 import Header from '../components/Header';
-import { backgroundColorSelector, colorSelector } from '../redux/selectors/theme';
+import {
+  backgroundColorSelector,
+  colorSelector,
+} from '../redux/selectors/theme';
 
 const Home = ({ navigation }: NavigationInjectedProps) => {
+  const handleGetInitialConversion = useReduxAction(getInitialConversion);
+  useEffect(() => {
+    handleGetInitialConversion();
+  }, []);
+
   const handleHeaderPress = useCallback(() => {
     navigation.navigate(ROUTES.Options);
   }, [navigation.navigate]);
@@ -50,12 +62,15 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
 
   const conversionSelector = conversions[baseCurrency];
   const conversionDate = new Date(get(conversionSelector, 'date', ''));
-  const conversionRate: number = get(
+  const conversionRate = get(
     conversionSelector,
     `rates.${quoteCurrency}`,
     0,
   ).toFixed(2);
-  const quotePrice = (amount * conversionRate).toFixed(2);
+  const quotePrice =
+    conversionRate === '0.00'
+      ? 'loading...'
+      : (amount * conversionRate).toFixed(2);
 
   const backgroundColor = useReduxState(backgroundColorSelector);
   const color = useReduxState(colorSelector);

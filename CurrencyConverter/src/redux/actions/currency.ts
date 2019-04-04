@@ -4,8 +4,11 @@ import {
   CHANGE_CHURRENCY_AMOUNT,
   CHANGE_BASE_CURRENCY,
   CHANGE_QUOTE_CURRENCY,
+  GET_INITIAL_CONVERSION,
+  CONVERSION_SUCCESS,
+  CONVERSION_ERROR,
 } from '../constants';
-import { TCurrencies } from '../types';
+import { TCurrencies, ICurrencyApi } from '../types';
 
 export const swapCurrency = () => createAction(SWAP_CURRENCY);
 
@@ -17,3 +20,12 @@ export const changeBaseCurrency = (payload: TCurrencies) =>
 
 export const changeQuoteCurrency = (payload: TCurrencies) =>
   createAction(CHANGE_QUOTE_CURRENCY, payload);
+
+export const getInitialConversion = () => createAction(GET_INITIAL_CONVERSION);
+
+export const conversionSuccess = (payload: ICurrencyApi) =>
+  createAction(CONVERSION_SUCCESS, payload);
+
+// TODO: remove any type
+export const conversionError = (payload: any) =>
+  createAction(CONVERSION_ERROR, payload);

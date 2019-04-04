@@ -23,6 +23,12 @@ export type TThemes = {
   }
 };
 
+export interface ICurrencyApi {
+  base: TCurrencies;
+  date: string;
+  rates: { [key in TCurrencies]: number };
+}
+
 // TODO: How to create a type from all elements in a string array
 export type TCurrencies =
   | 'AUD'
