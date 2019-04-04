@@ -16,6 +16,7 @@ import {
   baseCurrencySelector,
   quoteCurrencySelector,
   conversionsSelector,
+  errorSelector,
 } from '../redux/selectors/currency';
 
 import Wrapper from '../components/Wrapper';
@@ -24,6 +25,7 @@ import InputWithButton from '../components/InputWithButton';
 import ClearButton from '../components/ClearButton';
 import LastConverted from '../components/LastConverted';
 import Header from '../components/Header';
+import { useAlert, AlertProvider } from '../components/Alert';
 import {
   backgroundColorSelector,
   colorSelector,
@@ -34,6 +36,15 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
   useEffect(() => {
     handleGetInitialConversion();
   }, []);
+  const error = useReduxState(errorSelector);
+  const alert = useAlert();
+  useEffect(() => {
+    if (error) {
+      const message =
+        typeof error === 'string' ? error : 'Failed fetching currency data.';
+      alert.current && alert.current.alertWithType('error', 'Error!', message);
+    }
+  }, [error]);
 
   const handleHeaderPress = useCallback(() => {
     navigation.navigate(ROUTES.Options);
@@ -76,35 +87,40 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
   const color = useReduxState(colorSelector);
 
   return (
-    <Wrapper backgroundColor={backgroundColor}>
-      <StatusBar translucent={false} barStyle={'light-content'} />
-      <Header onPress={handleHeaderPress} />
-      <KeyboardAvoidingView behavior="padding">
-        <Logo tintColor={color} />
-        <InputWithButton
-          text={baseCurrency}
-          onPress={handlePressBaseCurrency}
-          keyboardType="numeric"
-          defaultValue={amount.toString()}
-          onChangeText={handleTextChange}
-          textColor={backgroundColor}
-        />
-        <InputWithButton
-          text={quoteCurrency}
-          onPress={handlePressQuoteCurrency}
-          editable={false}
-          value={quotePrice}
-          textColor={backgroundColor}
-        />
-        <LastConverted
-          base={baseCurrency}
-          quote={quoteCurrency}
-          rate={conversionRate}
-          date={conversionDate}
-        />
-        <ClearButton text={'Reverse Currencies'} onPress={handleSwapCurrency} />
-      </KeyboardAvoidingView>
-    </Wrapper>
+    <AlertProvider>
+      <Wrapper backgroundColor={backgroundColor}>
+        <StatusBar translucent={false} barStyle={'light-content'} />
+        <Header onPress={handleHeaderPress} />
+        <KeyboardAvoidingView behavior="padding">
+          <Logo tintColor={color} />
+          <InputWithButton
+            text={baseCurrency}
+            onPress={handlePressBaseCurrency}
+            keyboardType="numeric"
+            defaultValue={amount.toString()}
+            onChangeText={handleTextChange}
+            textColor={backgroundColor}
+          />
+          <InputWithButton
+            text={quoteCurrency}
+            onPress={handlePressQuoteCurrency}
+            editable={false}
+            value={quotePrice}
+            textColor={backgroundColor}
+          />
+          <LastConverted
+            base={baseCurrency}
+            quote={quoteCurrency}
+            rate={conversionRate}
+            date={conversionDate}
+          />
+          <ClearButton
+            text={'Reverse Currencies'}
+            onPress={handleSwapCurrency}
+          />
+        </KeyboardAvoidingView>
+      </Wrapper>
+    </AlertProvider>
   );
 };
 

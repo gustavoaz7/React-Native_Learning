@@ -15,7 +15,7 @@ interface IState {
   readonly baseCurrency: TCurrencies;
   readonly quoteCurrency: TCurrencies;
   readonly amount: number;
-  readonly error: object | null;
+  readonly error: string | boolean;
   readonly conversions: { [key in TCurrencies]?: ICurrencyApi };
 }
 
@@ -23,7 +23,7 @@ const initialState: IState = {
   baseCurrency: 'BRL',
   quoteCurrency: 'USD',
   amount: 1,
-  error: null,
+  error: false,
   conversions: {},
 };
 

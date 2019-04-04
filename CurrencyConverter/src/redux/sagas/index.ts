@@ -22,7 +22,6 @@ import {
   SWAP_CURRENCY,
   CHANGE_BASE_CURRENCY,
   GET_INITIAL_CONVERSION,
-  CONVERSION_ERROR,
 } from '../constants';
 import { TCurrencies, ExtractActions } from '../types';
 import * as currencyActions from '../actions/currency';
@@ -41,15 +40,15 @@ function* fetchConversionRates(action: CurrencyActions) {
     if (currency === undefined) {
       currency = yield select(baseCurrencySelector);
     }
-    const response = yield call(getLatestRate, currency);
+    const response = yield call(getLatestRate, currency as TCurrencies);
     const result = yield response.json();
     if (result.error) {
-      yield put({ type: CONVERSION_ERROR, error: result.error });
+      yield put(currencyActions.conversionError(result.error));
     } else {
       yield put(currencyActions.conversionSuccess(result));
     }
   } catch (e) {
-    yield put({ type: CONVERSION_ERROR, error: e });
+    yield put(currencyActions.conversionError(true));
     console.log('fetchConversionRates error: ', e);
   }
 }

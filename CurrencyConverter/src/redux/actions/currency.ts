@@ -26,6 +26,5 @@ export const getInitialConversion = () => createAction(GET_INITIAL_CONVERSION);
 export const conversionSuccess = (payload: ICurrencyApi) =>
   createAction(CONVERSION_SUCCESS, payload);
 
-// TODO: remove any type
-export const conversionError = (payload: any) =>
+export const conversionError = (payload: string | boolean) =>
   createAction(CONVERSION_ERROR, payload);
