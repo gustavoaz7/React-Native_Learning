@@ -5,7 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
 import { ReducerState } from './types';
-import rootSaga from './sagas';
+import { rootSaga } from './sagas';
 
 interface IReduxStoreProviderProps {
   children: ReactNode;

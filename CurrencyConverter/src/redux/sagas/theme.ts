@@ -16,11 +16,41 @@
  *    and automatically cancels any previous saga task started previously if it's still running
  * race(effects) = run a Race between multiple Effects (similar to how Promise.race([]) behaves).
  */
+import AsyncStorage from '@react-native-community/async-storage';
+import { takeEvery, take, fork, all, call, put } from 'redux-saga/effects';
+import { GET_STORED_THEME, CHANGE_THEME_COLOR, THEME_KEY } from '../constants';
+import { changeTheme as changeThemeAction } from '../actions/theme';
+import { TThemeColors } from '../types';
 
-import { all, fork } from 'redux-saga/effects';
-import { currencySagas } from './currency';
-import { themeSagas } from './theme';
+type TChangeThemeAction = ReturnType<typeof changeThemeAction>;
 
-export function* rootSaga() {
-  yield all([yield fork(currencySagas), yield fork(themeSagas)]);
+function* getStoredTheme() {
+  yield take(GET_STORED_THEME);
+  try {
+    const storedTheme: TThemeColors | null = yield call(
+      AsyncStorage.getItem,
+      THEME_KEY,
+    );
+    if (storedTheme) {
+      yield put(changeThemeAction(storedTheme));
+    }
+  } catch (e) {
+    console.log('getStoredTheme error: ', e);
+  }
+}
+
+function* changeTheme(action: TChangeThemeAction) {
+  const theme = action.payload;
+  try {
+    yield call(AsyncStorage.setItem, THEME_KEY, theme);
+  } catch (e) {
+    console.log('changeTheme error: ', e);
+  }
+}
+
+export function* themeSagas() {
+  yield all([
+    yield fork(getStoredTheme),
+    yield takeEvery(CHANGE_THEME_COLOR, changeTheme),
+  ]);
 }

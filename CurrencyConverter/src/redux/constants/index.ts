@@ -10,4 +10,8 @@ export const CONVERSION_ERROR = 'CONVERSION_ERROR';
 export const CONVERSION_SUCCESS = 'CONVERSION_SUCCESS';
 
 // Theme
+export const GET_STORED_THEME = 'GET_STORED_THEME';
 export const CHANGE_THEME_COLOR = 'CHANGE_THEME_COLOR';
+
+// AsyncStorage Keys
+export const THEME_KEY = '@CURRENCY_CONVERTER/THEME';
