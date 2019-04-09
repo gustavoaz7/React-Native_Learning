@@ -33,8 +33,11 @@ function* getStoredTheme() {
     );
     if (storedTheme) {
       yield put(changeThemeAction(storedTheme));
+    } else {
+      yield put(changeThemeAction('Blue'));
     }
   } catch (e) {
+    yield put(changeThemeAction('Blue'));
     console.log('getStoredTheme error: ', e);
   }
 }

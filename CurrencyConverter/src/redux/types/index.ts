@@ -14,7 +14,7 @@ export interface IAction<T extends string, P> {
   readonly payload: P;
 }
 
-export type TThemeColors = 'Blue' | 'Orange' | 'Green' | 'Purple';
+export type TThemeColors = 'Default' | 'Blue' | 'Orange' | 'Green' | 'Purple';
 
 export type TThemes = {
   [key in TThemeColors]: {

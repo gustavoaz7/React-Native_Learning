@@ -10,7 +10,7 @@ interface ITheme {
 }
 
 const initialState: ITheme = {
-  ...themes.Blue,
+  ...themes.Default,
 };
 
 type themeActions = ExtractActions<

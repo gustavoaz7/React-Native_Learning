@@ -1,6 +1,10 @@
 import { TThemes } from '../redux/types';
 
 const themes: TThemes = {
+  Default: {
+    backgroundColor: '#c1c1c1',
+    color: '#666',
+  },
   Blue: {
     backgroundColor: '#4F6D7A',
     color: '#fff',
