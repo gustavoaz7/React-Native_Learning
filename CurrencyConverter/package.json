@@ -8,6 +8,7 @@
     "lint": "tslint 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.2.4",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "react": "16.8.3",
