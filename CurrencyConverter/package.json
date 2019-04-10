@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.2.4",
+    "dayjs": "^1.8.12",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.1",
     "react-native-dropdownalert": "^3.9.2",

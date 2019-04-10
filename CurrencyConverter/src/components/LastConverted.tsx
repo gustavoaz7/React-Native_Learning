@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { useReduxState } from '../hooks/useReduxState';
 import { colorSelector } from '../redux/selectors/theme';
 
@@ -16,7 +16,7 @@ const LastConverted = ({ base, quote, rate, date }: ILastConverted) => {
   return (
     <View style={styles.container}>
       <Text style={{ color }}>
-        {`1 ${base} = ${rate} ${quote} as of ${moment(date).format(
+        {`1 ${base} = ${rate} ${quote} as of ${dayjs(date).format(
           'MMMM, DD, YYYY',
         )}`}
       </Text>
