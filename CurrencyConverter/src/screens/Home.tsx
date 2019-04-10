@@ -100,7 +100,7 @@ const Home = ({ navigation }: NavigationInjectedProps) => {
             text={baseCurrency}
             onPress={handlePressBaseCurrency}
             keyboardType="numeric"
-            defaultValue={amount.toString()}
+            value={amount.toString()}
             onChangeText={handleTextChange}
             textColor={backgroundColor}
           />

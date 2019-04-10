@@ -8,6 +8,7 @@
     "jsx-space-before-trailing-slash": true,
     "jsx-boolean-value": false,
     "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false,
     "ordered-imports": false,
     "member-ordering": false,
     "object-literal-sort-keys": false,
@@ -21,7 +22,11 @@
       "allow-pascal-case",
       "ban-keywords",
       "check-format"
-    ]
+    ],
+    "arrow-return-shorthand": true,
+    "curly": true,
+    "no-unused-expression": false,
+    "no-shadowed-variable": false
   },
   "rulesDirectory": []
 }
