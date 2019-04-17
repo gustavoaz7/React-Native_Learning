@@ -19,7 +19,7 @@ interface IState {
   readonly conversions: { [key in TCurrencies]?: ICurrencyApi };
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   baseCurrency: 'BRL',
   quoteCurrency: 'USD',
   amount: 1,
