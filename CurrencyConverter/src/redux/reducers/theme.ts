@@ -9,7 +9,7 @@ interface ITheme {
   color: string;
 }
 
-const initialState: ITheme = {
+export const initialState: ITheme = {
   ...themes.Default,
 };
 
