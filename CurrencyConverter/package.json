@@ -19,6 +19,8 @@
     "react-navigation": "^3.5.1",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
@@ -43,6 +45,7 @@
     "tslint": "^5.14.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0",
+    "tslint-react-hooks": "^2.0.0",
     "typescript": "^3.3.3333"
   }
 }

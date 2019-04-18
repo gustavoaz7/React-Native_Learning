@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useReduxStore } from '../redux/store';
+import { useReduxStore } from '../redux/context';
 import { ReducerState } from '../redux/types';
 
 // TODO: Check if this is triggering a re-render of every function using this hook

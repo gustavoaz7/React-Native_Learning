@@ -9,7 +9,6 @@ import {
   changeCurrencyAmount,
   getInitialConversion,
 } from '../redux/actions/currency';
-import { getStoredTheme } from '../redux/actions/theme';
 import { useReduxAction } from '../hooks/useReduxAction';
 import { useReduxState } from '../hooks/useReduxState';
 import {
@@ -33,10 +32,8 @@ import {
 } from '../redux/selectors/theme';
 
 const Home = ({ navigation }: NavigationInjectedProps) => {
-  const handleGetStoredTheme = useReduxAction(getStoredTheme);
   const handleGetInitialConversion = useReduxAction(getInitialConversion);
   useEffect(() => {
-    handleGetStoredTheme();
     handleGetInitialConversion();
   }, []);
   const error = useReduxState(errorSelector);
