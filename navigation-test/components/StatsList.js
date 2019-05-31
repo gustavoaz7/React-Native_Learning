@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { Block, Text } from "../base-components";
 
 export class StatsList extends React.Component {
@@ -25,7 +25,7 @@ export class StatsList extends React.Component {
     </Block>
   );
 
-  renderSeparator = () => <View style={styles.separator} />;
+  renderSeparator = () => <Block style={styles.separator} />;
 
   render() {
     return (

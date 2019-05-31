@@ -15,18 +15,18 @@ export default class CollapsableContent extends React.Component {
   };
 
   render() {
-    const { title, children } = this.props;
+    const { title = '', children, style } = this.props;
     return (
       <Block flex={1} alignItems="center" >
         <Block row justifyContent="space-between" fullWidth padding={[10, 0]}>
-          <Text title bold>{title}</Text>
+          <Text title bold>{title.toUpperCase()}</Text>
           <TouchableOpacity onPress={this.toggleCollapsed}>
             <Feather name="chevron-down" size={20} color={colors.grayDark} />
           </TouchableOpacity>
         </Block>
         <Block fullWidth>
           <Collapsible collapsed={this.state.collapsed}>
-            <Block shadow>
+            <Block shadow style={style}>
               {children}
             </Block>
           </Collapsible>
