@@ -20,7 +20,7 @@ export class StatsList extends React.Component {
         <Text>{item.quantity}</Text>
       </Block>
       <Block flex={1} alignItems="flex-end">
-        <Text>{item.total}</Text>
+        <Text bold>{item.total}</Text>
       </Block>
     </Block>
   );
@@ -34,6 +34,7 @@ export class StatsList extends React.Component {
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
         ItemSeparatorComponent={this.renderSeparator}
+        style={this.props.style}
       />
     );
   }

@@ -3,6 +3,7 @@ import { TouchableOpacity } from "react-native";
 import Collapsible from "react-native-collapsible";
 import { Feather } from "@expo/vector-icons";
 import { Block, Text } from "../base-components";
+import { colors } from "../constants/theme";
 
 export default class CollapsableContent extends React.Component {
   state = {
@@ -17,10 +18,10 @@ export default class CollapsableContent extends React.Component {
     const { title, children } = this.props;
     return (
       <Block flex={1} alignItems="center" >
-        <Block row justifyContent="space-between" fullWidth>
-          <Text title>{title}</Text>
+        <Block row justifyContent="space-between" fullWidth padding={[10, 0]}>
+          <Text title bold>{title}</Text>
           <TouchableOpacity onPress={this.toggleCollapsed}>
-            <Feather name="chevron-down" size={16} color="#333" />
+            <Feather name="chevron-down" size={20} color={colors.grayDark} />
           </TouchableOpacity>
         </Block>
         <Block fullWidth>

@@ -1,14 +1,15 @@
 import React from "react";
 import {
   View,
-  Text,
   TouchableOpacity,
-  Dimensions,
   StyleSheet
 } from "react-native";
 import { Svg, LinearGradient } from "expo";
 import { Feather } from "@expo/vector-icons";
 import { Dumbbell, Inbox, Stats, User } from "../assets/images/components";
+import { Text } from "../base-components";
+import { window } from "../constants/layout";
+import { colors } from "../constants/theme";
 
 const SVG_MAP = {
   TREINO: Dumbbell,
@@ -17,10 +18,10 @@ const SVG_MAP = {
   PERFIL: User
 };
 
-const Screen = Dimensions.get("screen");
-const proportionalHeight = height => height * (Screen.width / 413);
+const proportionalHeight = height => height * (window.width / 413);
 const NAV_HEIGHT = proportionalHeight(88);
 const FAB_SIZE = proportionalHeight(68);
+export const NAV_PADDING = 100;
 
 export class CustomBottomNavigation extends React.Component {
   renderFAB = () => {
@@ -41,7 +42,7 @@ export class CustomBottomNavigation extends React.Component {
           marginBottom: proportionalHeight(60)
         }}
       >
-        <Feather name="menu" size={28} color="#fff" />
+        <Feather name="menu" size={28} color={colors.white} />
       </LinearGradient>
     );
   };
@@ -65,7 +66,7 @@ export class CustomBottomNavigation extends React.Component {
         <View style={{ aspectRatio: 1, height: 25 }}>
           <SvgComponent />
         </View>
-        <Text style={{ color: "#6155CC" }}>{routeName}</Text>
+        <Text color={colors.purpleDark} caption bold>{routeName}</Text>
       </TouchableOpacity>
     );
   };
@@ -88,12 +89,12 @@ export class CustomBottomNavigation extends React.Component {
           <View style={styles.svg}>
             <Svg
               height={NAV_HEIGHT + 80}
-              width={Screen.width + 80}
+              width={window.width + 80}
               viewBox={`0 0 493 168`}
             >
               <Svg.Path
                 d="M40 45.1569H182.315C191.237 45.1569 199.059 51.0759 202.343 59.3715C207.305 71.9049 215.727 89.1018 226.396 95.2464C232.896 98.9903 253.664 106.244 271.585 92.4082C279.084 86.6182 287.441 69.835 292.708 57.9216C296.071 50.3125 303.504 45.1569 311.823 45.1569H453V133H40V45.1569Z"
-                fill="#fff"
+                fill={colors.white}
               />
             </Svg>
           </View>

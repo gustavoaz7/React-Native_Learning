@@ -1,6 +1,6 @@
 import React, { Component } from 'React';
 import { View, Text, StyleSheet } from 'react-native';
-import { background } from '../constants/Colors';
+import { background } from '../constants/theme';
 
 export class ScreenB extends Component {
   render() {

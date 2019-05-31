@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View, Animated, Platform } from 'react-native'
+import { colors } from '../constants/theme';
 
 export class Block extends PureComponent {
   handleSpacing(variant, spacing) {
@@ -107,16 +108,18 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   shadow: {
-    borderWidth: 0,
+    backgroundColor: colors.white,
     ...Platform.select({
       ios: {
-        shadowColor: '#333',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 13,
+        shadowColor: '#607293',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.2,
+        shadowRadius: 20,
       },
       android: {
-        elevation: 8,
+        // TODO: check shadow layout on android
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: '#607293',
       },
     }),
   },

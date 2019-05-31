@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { Text as RNText, StyleSheet } from "react-native";
+import { colors } from "../constants/theme";
 
 export class Text extends PureComponent {
   render() {
@@ -9,18 +10,11 @@ export class Text extends PureComponent {
       body,
       caption,
       size,
-      transform,
-      align,
-      regular,
       bold,
       semibold,
-      medium,
-      weight,
       light,
       center,
       right,
-      spacing, // letter-spacing
-      height, // line-height
       color,
       style,
       children,
@@ -34,11 +28,6 @@ export class Text extends PureComponent {
       body && styles.body,
       caption && styles.caption,
       size && { fontSize: size },
-      transform && { textTransform: transform },
-      align && { textAlign: align },
-      height && { lineHeight: height },
-      spacing && { letterSpacing: spacing },
-      weight && { fontWeight: weight },
       bold && styles.bold,
       semibold && styles.semibold,
       light && styles.light,
@@ -58,7 +47,7 @@ export class Text extends PureComponent {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#333'
+    color: colors.grayDark,
   },
   bold: {
     fontWeight: "bold",
@@ -69,10 +58,22 @@ const styles = StyleSheet.create({
   light: {
     fontWeight: "200",
   },
-  center: { textAlign: "center" },
-  right: { textAlign: "right" },
-  header: 24,
-  title: 18,
-  body: 14,
-  caption: 12
+  center: {
+    textAlign: "center",
+  },
+  right: {
+    textAlign: "right",
+  },
+  header: {
+    fontSize: 20,
+  },
+  title: {
+    fontSize: 16,
+  },
+  body: {
+    fontSize: 14,
+  },
+  caption: {
+    fontSize: 12
+  },
 });
